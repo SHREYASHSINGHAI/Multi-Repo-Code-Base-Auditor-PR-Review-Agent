@@ -16,6 +16,7 @@ async def main():
     print("🤖 Running Audit Test on Sample Diff...\n")
     report = await brain.run_audit(sample_diff)
     print(report)
+    print('-'*60)
 
 if __name__ == "__main__":
     asyncio.run(main())
