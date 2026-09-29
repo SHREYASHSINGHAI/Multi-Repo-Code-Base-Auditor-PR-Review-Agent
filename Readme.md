@@ -100,13 +100,13 @@ git clone [https://github.com/your-username/sentinel-code.git](https://github.co
 cd sentinel-code
 
 ```
-# Create and activate virtual environment
+ Create and activate virtual environment
 ```
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 ```
-# Install dependencies
+ Install dependencies
 ```
 pip install -r requirements.txt
 Set up your Gemini API key in your environment variables:
@@ -114,15 +114,15 @@ Set up your Gemini API key in your environment variables:
 ```
 Bash
 
-# On Linux/macOS
+ On Linux/macOS
 ```
 export GOOGLE_API_KEY="your-gemini-api-key"
 ```
-# On Windows (PowerShell)
+ On Windows (PowerShell)
 ```
 $env:GOOGLE_API_KEY="your-gemini-api-key"
 ```
-## Usage & Testing
+# Usage & Testing
 Running the CLI Directly
 Make a change in your project or add a file containing code changes:
 
