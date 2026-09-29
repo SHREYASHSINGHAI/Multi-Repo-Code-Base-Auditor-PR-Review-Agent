@@ -50,7 +50,10 @@ Sentinel-Code is a lightweight, context-aware AI auditing engine designed to cat
                    │   Terminal / PR      │
                    │   Structured Report  │
                    └──────────────────────┘
-Project Structure
+
+```
+## Project Structure
+```
 Plaintext
 sentinel_code/
 ├── core/
@@ -72,8 +75,10 @@ sentinel_code/
 │ 
 └── README.md
 
+```
+## Getting Started
+```
 
-Getting Started
 1. Prerequisites
 Python 3.10 or higher
 
