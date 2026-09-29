@@ -75,45 +75,64 @@ sentinel_code/
 │ 
 └── README.md
 
+```text
 ```
 ## Getting Started
 ```
 
-* 1. Prerequisites
+```
+1. Prerequisites
+```
 Python 3.10 or higher
 
 Git installed and configured
 
 Google Gemini API Key
-
-* 2. Environment Setup
+```
+2. Environment Setup
+```
 Clone the repository and set up a virtual environment:
 
-* Bash
+```
+Bash
+```
 git clone [https://github.com/your-username/sentinel-code.git](https://github.com/your-username/sentinel-code.git)
 cd sentinel-code
 
-* # Create and activate virtual environment
+```
+# Create and activate virtual environment
+```
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-* # Install dependencies
+```
+# Install dependencies
+```
 pip install -r requirements.txt
 Set up your Gemini API key in your environment variables:
 
-* Bash
-* # On Linux/macOS
+```
+Bash
+
+# On Linux/macOS
+```
 export GOOGLE_API_KEY="your-gemini-api-key"
-
-* # On Windows (PowerShell)
+```
+# On Windows (PowerShell)
+```
 $env:GOOGLE_API_KEY="your-gemini-api-key"
-* Usage & Testing
-* Running the CLI Directly
-* Make a change in your project or add a file containing code changes:
+```
+## Usage & Testing
+Running the CLI Directly
+Make a change in your project or add a file containing code changes:
 
-* Bash
+Bash
+```
 git add sample_code.py
+```
 Run the Sentinel-Code local CLI auditor:
 
-* Bash
+
+Bash
+```
 python -m interfaces.cli
