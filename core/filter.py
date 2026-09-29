@@ -17,16 +17,13 @@ def parse_diff_metadata(diff_text: str) -> Tuple[List[str], bool]:
     meaningful_lines = []
 
     for line in lines:
-        # Extract modified file paths from Git diff headers
         if line.startswith('+++ b/'):
             file_path = line.replace('+++ b/', '').strip()
             file_paths.append(file_path)
             continue
         
-        # Check added or removed lines (ignoring header syntax)
         if (line.startswith('+') or line.startswith('-')) and not line.startswith(('+++', '---')):
             content = line[1:].strip()
-            # Ignore empty lines and standard single-line comments
             if content and not content.startswith(('#', '//', '/*', '*', '<!--')):
                 meaningful_lines.append(content)
 
