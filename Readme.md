@@ -90,9 +90,9 @@ Git installed and configured
 Google Gemini API Key
 ```
 2. Environment Setup
-```
-Clone the repository and set up a virtual environment:
 
+Clone the repository and set up a virtual environment:
+```
 ```
 Bash
 ```
