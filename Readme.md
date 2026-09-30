@@ -92,8 +92,6 @@ Google Gemini API Key
 2. Environment Setup
 
 Clone the repository and set up a virtual environment:
-```
-```
 Bash
 ```
 git clone [https://github.com/your-username/sentinel-code.git](https://github.com/your-username/sentinel-code.git)
