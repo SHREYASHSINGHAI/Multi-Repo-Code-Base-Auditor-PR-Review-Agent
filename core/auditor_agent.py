@@ -9,9 +9,9 @@ from core.rules_loader import load_security_rules
 load_dotenv()
 
 class CodeAuditorBrain:
-    def __init__(self, model_name: str = "gemini-2.5-flash"):
+    def __init__(self, model_name: str = ):
         self.llm = ChatGoogleGenerativeAI(
-            model=model_name,
+            model=os.getenv("MODEL"),
             temperature=0.1
         )
         self.rules = load_security_rules()
