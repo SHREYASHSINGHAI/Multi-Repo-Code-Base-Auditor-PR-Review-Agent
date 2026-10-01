@@ -42,7 +42,7 @@ Config files (`.yaml`, `.json`, `.toml`, `.env`) are deliberately **not** skippe
 
 **2. File-aware context.** Only the files that need review are sent to the model, with their paths, so findings point to the right file.
 
-**3. Rule-based audit.** The diff is checked against `rules/security_rules.md`. Safeguards: the diff is wrapped in `<code_diff>` tags and the model is told to treat it as data (prompt-injection guard), backticks are sanitized, and oversized diffs are cut at a line boundary.
+**3. Rule-based audit.** The diff is checked against `rules/security_rules.md`. Safeguards: the diff is wrapped in `<code_diff>` tags and the model is told to treat it as data (prompt-injection guard), backticks are sanitized, and oversized diffs are cut at a line boundary to respect a free-tier token budget (6,000 characters, roughly 1,500 tokens).
 
 ## Results
 
@@ -145,7 +145,7 @@ The benchmark measures the **filter** (skip rate, estimated tokens, speed). It n
 
 - **Advisory by design.** Sentinel-Code prints a report for your staged changes. It never blocks a commit or push, and you run it yourself after `git add`.
 - **Heuristic filtering, not an AST parser.** It works on diff lines. Python docstrings are treated as code, and files skipped by type (`.md`, `.txt`) are never audited, so a secret placed there would be missed.
-- **Large diffs are truncated.** After filtering, anything beyond 6,000 characters is not audited.
+- **Token budget cap.** To stay within free-tier limits, each audit sends at most 6,000 characters (roughly 1,500 tokens) of filtered diff. Anything beyond that is not audited, and the report does not currently warn you when this happens. Raise `max_chars` in `core/auditor_agent.py` if you have a paid plan.
 - **Model output is free-form markdown.** LLMs can miss issues or flag false positives. Use Sentinel-Code as a review aid alongside tools like gitleaks or CodeQL, not as a replacement.
 - **Code is sent to a third party.** Audited diffs are sent to Google's Gemini API. Do not use it on code you are not allowed to share with that service.
 
