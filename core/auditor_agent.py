@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
-from core.filter import parse_diff_metadata
+from core.filter import parse_diff_metadata, extract_meaningful_diff
 from core.rules_loader import load_security_rules
 
 
@@ -47,24 +47,27 @@ Keep responses concise, direct, and actionable."""),
 
     async def run_audit(self, diff_text: str) -> str:
         """Runs the smart audit pipeline."""
-        # Extract metadata and check for meaningful changes
+        # 1. Check if the diff contains meaningful changes
         file_paths, is_meaningful = parse_diff_metadata(diff_text)
         if not is_meaningful:
-            return "⚡ **[Audit Skipped]**: Only trivial formatting or comment changes detected. 0 tokens used."
+            return "⚡ **[Audit Skipped]**: Only non-code, trivial formatting, or comment changes detected. 0 tokens used."
 
-        # 1. Sanitize raw backticks to prevent prompt/markdown injection
-        sanitized_diff = diff_text.replace("```", "'''")
+        # 2. Extract ONLY meaningful diff blocks (filters out lockfiles, docs, images, etc.)
+        filtered_diff = extract_meaningful_diff(diff_text)
 
-        # 2. Truncate diff cleanly at line break if oversized
+        # 3. Sanitize raw backticks to prevent prompt/markdown injection
+        sanitized_diff = filtered_diff.replace("```", "'''")
+
+        # 4. Truncate diff cleanly at line break if oversized
         max_chars = 6000
         if len(sanitized_diff) > max_chars:
             truncated = sanitized_diff[:max_chars].rsplit('\n', 1)[0]
             sanitized_diff = f"{truncated}\n... [Diff truncated for token budget]"
 
-        # 3. Format File List for Context
+        # 5. Format File List for Context
         files_str = "\n".join([f"- `{f}`" for f in file_paths]) if file_paths else "Unknown File"
 
-        # 4. Invoke Agent Chain
+        # 6. Invoke Agent Chain
         response = await self.chain.ainvoke({
             "rules": self.rules,
             "file_paths": files_str,
