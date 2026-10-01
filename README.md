@@ -58,7 +58,7 @@ These numbers describe filtering efficiency, not answer quality. Savings depend 
 ## Quick start
 
 ```bash
-git clone https://github.com/SHREYASHSINGHAI/Multi-Repo-Code-Base-Auditor-PR-Review-Agent.git
+git clone https://github.com/SHREYASHSINGHAI/Sentinel-Code.git
 cd Multi-Repo-Code-Base-Auditor-PR-Review-Agent
 
 python -m venv .venv
